@@ -1,16 +1,10 @@
 .gameContainer {
   display: flex;
-  flex-direction: column;
   gap: 50px;
-  .number {
-    height: 80px;
-    width: 80px;
-    border: 2px black solid;
-    font-size: 30px;
+  .gameFieldContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
+    flex-direction: column;
+    gap: 50px;
   }
   .gameField {
     display: grid;
@@ -18,10 +12,6 @@
     .column {
       display: flex;
       flex-direction: column;
-      .startNumbers {
-        background-color: blue;
-        color: white;
-      }
     }
   }
   .remaningNumbers {
