@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "outDir": "./dist/",
+      "paths": {
+        "pages": ["pages"],
+        "components": ["components"],
+        "widgets": ["widgets"],
+        "utils": ["utils"],
+        "store": ["store"],
+        "types": ["types"],
+        "mocks": ["mocks"]
+      },
+      "noImplicitAny": true,
+      "module": "esnext",
+      "target": "es5",
+      "jsx": "react-jsx",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "sourceMap": true,
+      "strict": true,
+      "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    },
+    "ts-node": {
+      "compilerOptions": {
+        "module": "CommonJS",
+      }
+    },
+    
+  }
+  
