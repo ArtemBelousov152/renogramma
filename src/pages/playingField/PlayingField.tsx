@@ -1,44 +1,41 @@
 import { Number } from 'components';
+import { observer } from 'mobx-react-lite';
 import { gameData } from 'mocks';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStores } from 'stores/rootStoreContext';
 
 import classes from './playingField.module.scss';
 
-export const PlayingField = () => {
-  const startField = useMemo(() => gameData, []);
-
+export const PlayingField = observer(() => {
+  const {
+    gameFieldStore: {
+      currentNumber,
+      gameField,
+      generateGameField,
+      putGameFieldItem,
+      remaningNumbers,
+      removeGameFieldItem,
+      setCurrentNumber,
+    },
+  } = useStores();
   const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
-
-  const [currentGameFfield, setCurrentGameField] = useState(
-    structuredClone(startField)
-  );
-  const [remaningNumbers, setRemaningNumbers] = useState<number[]>([]);
-  const [currentNumber, setCurrentNumber] = useState<number | null>(null);
+  // Подумать как переделать
   const [currentFieldHover, setCurrentFieldHover] = useState<null | {
     columnIndex: number;
     numberIndex: number;
   }>(null);
 
   useEffect(() => {
-    const newRemamingNumbers = [];
-    const currentGameFieldFlat = currentGameFfield.flat();
-    const currentNumbers = currentGameFieldFlat.filter((number) =>
-      Boolean(number)
-    );
-    for (let i = 1; i < currentGameFieldFlat.length; i++) {
-      if (!currentNumbers.includes(i)) {
-        newRemamingNumbers.push(i);
-      }
-    }
+    generateGameField();
+  }, []);
 
-    setRemaningNumbers(newRemamingNumbers);
-  }, [currentNumber, currentGameFfield]);
+  if (!gameField.length) return null;
 
   return (
     <div className={classes.gameContainer}>
       <div className={classes.gameFieldContainer}>
         <div className={classes.gameField}>
-          {currentGameFfield.map((column, columnIndex) => (
+          {gameField.map((column, columnIndex) => (
             <div className={classes.column} key={columnIndex}>
               {column.map((currentGameFieldItem, numberIndex) => {
                 const isStartNumber =
@@ -70,14 +67,9 @@ export const PlayingField = () => {
                     onDoubleClick={() => {
                       if (clickTimeout) clearTimeout(clickTimeout);
                       if (currentGameFieldItem && !isStartNumber) {
-                        setCurrentGameField((prevGameField) => {
-                          const newGameField = prevGameField;
-                          setCurrentNumber(
-                            newGameField[columnIndex][numberIndex]
-                          );
-                          newGameField[columnIndex][numberIndex] = null;
-
-                          return newGameField;
+                        removeGameFieldItem({
+                          columnIndex,
+                          numberIndex,
                         });
                       }
                     }}
@@ -88,26 +80,16 @@ export const PlayingField = () => {
                       const timeout = setTimeout(() => {
                         if (isStartNumber && currentGameFieldItem) {
                           setCurrentNumber(
-                            remaningNumbers[
-                              remaningNumbers.findIndex(
-                                (value) => value === currentGameFieldItem + 1
-                              )
-                            ]
+                            remaningNumbers.find(
+                              (value) => value === currentGameFieldItem + 1
+                            ) ?? 0
                           );
                         }
+
                         if (currentNumber && !isStartNumber) {
-                          setCurrentGameField((prevGameField) => {
-                            const newGameField = prevGameField;
-                            newGameField[columnIndex][numberIndex] =
-                              currentNumber;
-                            const nextNumber =
-                              remaningNumbers[
-                                remaningNumbers.findIndex(
-                                  (value) => value === currentNumber
-                                ) + 1
-                              ];
-                            setCurrentNumber(nextNumber);
-                            return newGameField;
+                          putGameFieldItem({
+                            columnIndex,
+                            numberIndex,
                           });
                         }
                       }, 200);
@@ -137,4 +119,4 @@ export const PlayingField = () => {
       </div>
     </div>
   );
-};
+});

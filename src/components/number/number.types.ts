@@ -4,7 +4,7 @@ export interface NumberProps
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >,
-    'onClick' | 'onMouseEnter' | 'onMouseLeave' | 'onDoubleClick'
+    'onClick' | 'onMouseEnter' | 'onMouseLeave' | 'onDoubleClick' | 'style'
   > {
   number: null | number;
   isDisabledText?: boolean;
