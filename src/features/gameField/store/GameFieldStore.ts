@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { gameData } from 'mocks';
-import { FieldItemPosition } from 'shared';
+import { FieldItemPosition } from 'shared/types';
 
 class GameFieldStore {
   gameField: Array<Array<number | null>> = [];
@@ -72,5 +72,4 @@ class GameFieldStore {
     this.calculateRemaningNumbers();
   };
 }
-
-export default new GameFieldStore();
+export const gameFieldStore = new GameFieldStore();

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC, useState } from 'react';
-import { Number } from 'shared';
+import { Number } from 'shared/components';
 import { useStores } from 'stores/rootStoreContext';
 
 import { GameFieldItemProps } from './gameFieldItem.types';

@@ -1,4 +1,4 @@
-import gameFieldStore from './GameFieldStore';
+import { gameFieldStore } from 'features/gameField';
 
 class RootStore {
   gameFieldStore = gameFieldStore;

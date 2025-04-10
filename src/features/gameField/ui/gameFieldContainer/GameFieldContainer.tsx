@@ -1,12 +1,12 @@
+import { GameFieldItem } from 'features/gameField/ui/gameFieldItem';
+import { RemaningNumbers } from 'features/gameField/ui/remaningNumbers';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useStores } from 'stores/rootStoreContext';
-import { GameFieldItem } from 'widgets/gameFieldItem';
-import { RemaningNumbers } from 'widgets/remaningNumbers';
 
 import classes from './gameField.module.scss';
 
-export const GameField = observer(() => {
+export const GameFieldContainer = observer(() => {
   const {
     gameFieldStore: { gameField, generateGameField },
   } = useStores();

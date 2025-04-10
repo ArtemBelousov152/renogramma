@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Number } from 'shared';
+import { Number } from 'shared/components';
 import { useStores } from 'stores/rootStoreContext';
 
 import classes from './gameFieldSideBar.module.scss';

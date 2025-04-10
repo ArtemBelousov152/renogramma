@@ -1,11 +1,11 @@
-import { GameField, GameFieldSIdeBar } from 'widgets';
+import { GameFieldContainer, GameFieldSIdeBar } from 'features/gameField/ui';
 
 import classes from './playingField.module.scss';
 
 export const PlayingField = () => {
   return (
     <div className={classes.gameContainer}>
-      <GameField />
+      <GameFieldContainer />
       <GameFieldSIdeBar />
     </div>
   );
