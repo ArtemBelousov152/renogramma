@@ -38,6 +38,7 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
       <Number
         isDisabledText={isHoverField && !isStartNumber}
         isStartNumber={isStartNumber}
+        isEnableHover={!isStartNumber}
         number={
           isHoverField && !isStartNumber && isEmptyField
             ? currentNumber

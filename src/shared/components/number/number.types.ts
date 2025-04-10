@@ -10,4 +10,5 @@ export interface NumberProps
   isDisabledText?: boolean;
   // TODO подумать как избавиться от 0 и null
   isStartNumber?: boolean | 0 | null;
+  isEnableHover?: boolean;
 }

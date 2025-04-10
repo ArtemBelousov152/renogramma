@@ -8,6 +8,7 @@ export const Number: FC<NumberProps> = ({
   number,
   isDisabledText,
   isStartNumber,
+  isEnableHover,
   ...props
 }) => {
   return (
@@ -16,6 +17,7 @@ export const Number: FC<NumberProps> = ({
       className={classNames(classes.number, {
         [classes.startNumbers]: isStartNumber,
         [classes.disabledNumber]: isDisabledText,
+        hover: isEnableHover,
       })}
     >
       {number}

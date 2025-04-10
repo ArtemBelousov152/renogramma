@@ -13,6 +13,7 @@ export const RemaningNumbers = observer(() => {
       {remaningNumbers.map((number, index) => (
         <Number
           number={number}
+          isEnableHover
           onClick={() => {
             setCurrentNumber(number);
           }}

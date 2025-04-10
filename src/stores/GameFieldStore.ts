@@ -34,6 +34,12 @@ class GameFieldStore {
     this.calculateRemaningNumbers();
   };
 
+  resetGameField = () => {
+    this.gameField = this.startField;
+    this.calculateRemaningNumbers();
+    this.currentNumber = null;
+  };
+
   setCurrentNumber = (number: number) => {
     this.currentNumber = number;
   };
