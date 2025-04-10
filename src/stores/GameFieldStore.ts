@@ -1,16 +1,13 @@
 import { makeAutoObservable } from 'mobx';
 import { gameData } from 'mocks';
-
-interface FieldItemPosition {
-  columnIndex: number;
-  numberIndex: number;
-}
+import { FieldItemPosition } from 'shared';
 
 class GameFieldStore {
   gameField: Array<Array<number | null>> = [];
   startField: Array<Array<number | null>> = [];
   remaningNumbers: number[] = [];
   currentNumber: number | null = null;
+  currentFieldHover: FieldItemPosition | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -39,6 +36,10 @@ class GameFieldStore {
 
   setCurrentNumber = (number: number) => {
     this.currentNumber = number;
+  };
+
+  setCurrentFieldHover = (fieldItelPosition: null | FieldItemPosition) => {
+    this.currentFieldHover = fieldItelPosition;
   };
 
   removeGameFieldItem = ({ columnIndex, numberIndex }: FieldItemPosition) => {
