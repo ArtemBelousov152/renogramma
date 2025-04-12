@@ -1,13 +1,17 @@
 * {
-    border: 0;
-    margin: 0;
-    box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(104, 104, 104);
 }
 
 input,
 button,
 textarea,
 select {
-    margin: 0;
-    font: inherit;
+  margin: 0;
+  font: inherit;
 }

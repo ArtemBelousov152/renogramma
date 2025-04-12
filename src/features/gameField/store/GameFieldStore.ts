@@ -1,13 +1,15 @@
 import { makeAutoObservable } from 'mobx';
-import { gameData } from 'mocks';
 import { FieldItemPosition } from 'shared/types';
+import { genMap } from 'shared/utils';
 
 class GameFieldStore {
   gameField: Array<Array<number | null>> = [];
   startField: Array<Array<number | null>> = [];
   remaningNumbers: number[] = [];
   currentNumber: number | null = null;
+  fullField: Array<Array<number | null>> = [];
   currentFieldHover: FieldItemPosition | null = null;
+  isGameFinished: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -29,18 +31,26 @@ class GameFieldStore {
   }
 
   generateGameField = () => {
-    this.gameField = gameData;
-    this.startField = gameData;
+    const { fld, fullfld } = genMap(8, 7);
+    this.gameField = structuredClone(fld);
+    this.startField = structuredClone(fld);
+    this.fullField = structuredClone(fullfld);
     this.calculateRemaningNumbers();
   };
 
+  checkIsGameFinished = () => {
+    if (this.gameField.length && this.fullField)
+      this.isGameFinished =
+        JSON.stringify(this.gameField) === JSON.stringify(this.fullField);
+  };
+
   resetGameField = () => {
-    this.gameField = this.startField;
+    this.gameField = JSON.parse(JSON.stringify(this.startField));
     this.calculateRemaningNumbers();
     this.currentNumber = null;
   };
 
-  setCurrentNumber = (number: number) => {
+  setCurrentNumber = (number: number | null) => {
     this.currentNumber = number;
   };
 
@@ -48,20 +58,20 @@ class GameFieldStore {
     this.currentFieldHover = fieldItelPosition;
   };
 
-  removeGameFieldItem = ({ columnIndex, numberIndex }: FieldItemPosition) => {
+  removeGameFieldItem = ({ columnIndex, rowIndex }: FieldItemPosition) => {
     const newGameField = this.gameField;
 
-    // this.currentNumber = newGameField[columnIndex][numberIndex]
+    // this.currentNumber = newGameField[columnIndex][rowIndex]
 
-    newGameField[columnIndex][numberIndex] = null;
+    newGameField[columnIndex][rowIndex] = null;
 
     this.gameField = newGameField;
     this.calculateRemaningNumbers();
   };
 
-  putGameFieldItem = ({ columnIndex, numberIndex }: FieldItemPosition) => {
+  putGameFieldItem = ({ columnIndex, rowIndex }: FieldItemPosition) => {
     const newGameField = this.gameField;
-    newGameField[columnIndex][numberIndex] = this.currentNumber;
+    newGameField[columnIndex][rowIndex] = this.currentNumber;
     const nextNumber =
       this.remaningNumbers[
         this.remaningNumbers.findIndex(

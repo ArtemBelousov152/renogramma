@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Number } from 'shared/components';
 import { useStores } from 'stores/rootStoreContext';
 
 import { GameFieldItemProps } from './gameFieldItem.types';
 
 export const GameFieldItem: FC<GameFieldItemProps> = observer(
-  ({ columnIndex, numberIndex, currentGameFieldItem }) => {
+  ({ columnIndex, rowIndex, currentGameFieldItem }) => {
     const {
       gameFieldStore: {
         startField,
@@ -19,18 +19,15 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
         remaningNumbers,
       },
     } = useStores();
-    const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(
-      null
-    );
 
     const isStartNumber =
-      startField[columnIndex][numberIndex] &&
-      startField[columnIndex][numberIndex] === currentGameFieldItem;
+      !!startField[columnIndex][rowIndex] &&
+      startField[columnIndex][rowIndex] === currentGameFieldItem;
 
     const isHoverField =
       currentFieldHover !== null &&
       currentFieldHover.columnIndex === columnIndex &&
-      currentFieldHover.numberIndex === numberIndex;
+      currentFieldHover.rowIndex === rowIndex;
 
     const isEmptyField = !currentGameFieldItem;
 
@@ -44,43 +41,41 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
             ? currentNumber
             : currentGameFieldItem
         }
-        key={`${currentGameFieldItem}_${numberIndex}`}
+        key={`${currentGameFieldItem}_${rowIndex}`}
         onMouseEnter={() => {
-          setCurrentFieldHover({ columnIndex, numberIndex });
+          setCurrentFieldHover({ columnIndex, rowIndex });
         }}
         onMouseLeave={() => {
           setCurrentFieldHover(null);
         }}
-        onDoubleClick={() => {
-          if (clickTimeout) clearTimeout(clickTimeout);
-          if (currentGameFieldItem && !isStartNumber) {
-            removeGameFieldItem({
-              columnIndex,
-              numberIndex,
-            });
+        onContextMenu={(event) => {
+          event.preventDefault();
+          if (currentNumber) {
+            setCurrentNumber(null);
+          } else {
+            removeGameFieldItem({ columnIndex, rowIndex });
           }
         }}
-        onClick={() => {
-          if (clickTimeout) {
-            clearTimeout(clickTimeout);
+        onClick={(event) => {
+          if (isStartNumber && currentGameFieldItem) {
+            setCurrentNumber(
+              remaningNumbers.find(
+                (value) => value >= currentGameFieldItem + 1
+              ) ?? null
+            );
           }
-          const timeout = setTimeout(() => {
-            if (isStartNumber && currentGameFieldItem) {
-              setCurrentNumber(
-                remaningNumbers.find(
-                  (value) => value === currentGameFieldItem + 1
-                ) ?? 0
-              );
-            }
 
-            if (currentNumber && !isStartNumber) {
-              putGameFieldItem({
-                columnIndex,
-                numberIndex,
-              });
-            }
-          }, 200);
-          setClickTimeout(timeout);
+          if (currentNumber && !isStartNumber) {
+            putGameFieldItem({
+              columnIndex,
+              rowIndex,
+            });
+          }
+
+          if (!currentNumber && !isStartNumber && currentGameFieldItem) {
+            setCurrentNumber(currentGameFieldItem);
+            removeGameFieldItem({ columnIndex, rowIndex });
+          }
         }}
       />
     );

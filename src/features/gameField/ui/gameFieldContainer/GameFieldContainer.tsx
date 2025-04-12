@@ -8,32 +8,53 @@ import classes from './gameField.module.scss';
 
 export const GameFieldContainer = observer(() => {
   const {
-    gameFieldStore: { gameField, generateGameField },
+    gameFieldStore: {
+      gameField,
+      generateGameField,
+      isGameFinished,
+      checkIsGameFinished,
+      remaningNumbers,
+    },
   } = useStores();
+
+  useEffect(() => {
+    checkIsGameFinished();
+  }, [remaningNumbers.length]);
+
+  useEffect(() => {
+    if (isGameFinished) {
+      // TODO: избавиться от alert
+      alert('Вы выиграли');
+      generateGameField();
+    }
+  }, [isGameFinished]);
 
   useEffect(() => {
     generateGameField();
   }, []);
 
   if (!gameField.length) return null;
-
   return (
-    <div className={classes.gameFieldContainer}>
-      <div className={classes.gameField}>
+    <main className={classes.gameFieldContainer}>
+      {/* TODO: Подумать как переделать */}
+      <div
+        style={{ gridTemplateColumns: `repeat(${gameField.length}, 80px)` }}
+        className={classes.gameField}
+      >
         {gameField.map((column, columnIndex) => (
           <div className={classes.column} key={columnIndex}>
-            {column.map((currentGameFieldItem, numberIndex) => (
+            {column.map((currentGameFieldItem, rowIndex) => (
               <GameFieldItem
                 columnIndex={columnIndex}
                 currentGameFieldItem={currentGameFieldItem}
-                numberIndex={numberIndex}
-                key={`${columnIndex}_${numberIndex}`}
+                rowIndex={rowIndex}
+                key={`${columnIndex}_${rowIndex}`}
               />
             ))}
           </div>
         ))}
       </div>
       <RemaningNumbers />
-    </div>
+    </main>
   );
 });
