@@ -1,5 +1,8 @@
-import { GameFieldItem } from 'features/gameField/ui/gameFieldItem';
-import { RemaningNumbers } from 'features/gameField/ui/remaningNumbers';
+import {
+  FinishGameDialog,
+  GameFieldItem,
+  RemaningNumbers,
+} from 'features/gameField/ui';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useStores } from 'stores/rootStoreContext';
@@ -11,29 +14,23 @@ export const GameFieldContainer = observer(() => {
     gameFieldStore: {
       gameField,
       generateGameField,
-      isGameFinished,
       checkIsGameFinished,
       remaningNumbers,
     },
   } = useStores();
 
   useEffect(() => {
-    checkIsGameFinished();
-  }, [remaningNumbers.length]);
-
-  useEffect(() => {
-    if (isGameFinished) {
-      // TODO: избавиться от alert
-      alert('Вы выиграли');
-      generateGameField();
+    if (!remaningNumbers.length) {
+      checkIsGameFinished();
     }
-  }, [isGameFinished]);
+  }, [remaningNumbers.length]);
 
   useEffect(() => {
     generateGameField();
   }, []);
 
   if (!gameField.length) return null;
+
   return (
     <main className={classes.gameFieldContainer}>
       {/* TODO: Подумать как переделать */}
@@ -54,6 +51,7 @@ export const GameFieldContainer = observer(() => {
           </div>
         ))}
       </div>
+      <FinishGameDialog />
       <RemaningNumbers />
     </main>
   );

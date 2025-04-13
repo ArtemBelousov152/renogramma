@@ -35,13 +35,13 @@ class GameFieldStore {
     this.gameField = structuredClone(fld);
     this.startField = structuredClone(fld);
     this.fullField = structuredClone(fullfld);
+    this.isGameFinished = false;
     this.calculateRemaningNumbers();
   };
 
   checkIsGameFinished = () => {
-    if (this.gameField.length && this.fullField)
-      this.isGameFinished =
-        JSON.stringify(this.gameField) === JSON.stringify(this.fullField);
+    this.isGameFinished =
+      JSON.stringify(this.gameField) === JSON.stringify(this.fullField);
   };
 
   resetGameField = () => {

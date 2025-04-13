@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { Number } from 'shared/components';
 import { useStores } from 'stores/rootStoreContext';
@@ -14,9 +15,9 @@ export const GameFieldSIdeBar = observer(() => {
         <Number number={currentNumber} />
         <span>Current</span>
       </div>
-      <button style={{ padding: 20 }} onClick={resetGameField}>
-        Reset
-      </button>
+      <Button variant="outlined" color="warning" onClick={resetGameField}>
+        Сбросить
+      </Button>
     </div>
   );
 });
