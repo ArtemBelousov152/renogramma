@@ -1,4 +1,5 @@
-import { PlayingField } from 'pages';
+import { ConfigureGameField } from 'features/gameField/ui';
+import { PlayingFieldPage } from 'pages/playingFieldPage';
 import { Route, Routes } from 'react-router-dom';
 import RootStore from 'stores/rootStore';
 import { RootStoreContext } from 'stores/rootStoreContext';
@@ -11,7 +12,8 @@ export const App = () => {
     <RootStoreContext.Provider value={new RootStore()}>
       <div className={classNames.app}>
         <Routes>
-          <Route path="/" element={<PlayingField />} />
+          <Route path="/game" element={<PlayingFieldPage />} />
+          <Route path="/" element={<ConfigureGameField />} />
         </Routes>
       </div>
     </RootStoreContext.Provider>

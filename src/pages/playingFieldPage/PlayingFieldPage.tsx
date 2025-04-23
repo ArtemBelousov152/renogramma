@@ -1,8 +1,8 @@
 import { GameFieldContainer, GameFieldSIdeBar } from 'features/gameField/ui';
 
-import classes from './playingField.module.scss';
+import classes from './playingFieldPage.module.scss';
 
-export const PlayingField = () => {
+export const PlayingFieldPage = () => {
   return (
     <div className={classes.gameContainer}>
       <GameFieldContainer />

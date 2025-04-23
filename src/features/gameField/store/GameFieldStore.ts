@@ -10,6 +10,8 @@ class GameFieldStore {
   fullField: Array<Array<number | null>> = [];
   currentFieldHover: FieldItemPosition | null = null;
   isGameFinished: boolean = false;
+  fieldWidth: number = 8;
+  fieldHeight: number = 7;
 
   constructor() {
     makeAutoObservable(this);
@@ -31,7 +33,7 @@ class GameFieldStore {
   }
 
   generateGameField = () => {
-    const { fld, fullfld } = genMap(8, 7);
+    const { fld, fullfld } = genMap(this.fieldWidth, this.fieldHeight);
     this.gameField = structuredClone(fld);
     this.startField = structuredClone(fld);
     this.fullField = structuredClone(fullfld);
@@ -50,6 +52,14 @@ class GameFieldStore {
     this.currentNumber = null;
   };
 
+  setFieldHeight = (newHeight: number) => {
+    this.fieldHeight = newHeight;
+  };
+
+  setFieldWidth = (newWidth: number) => {
+    this.fieldWidth = newWidth;
+  };
+
   setCurrentNumber = (number: number | null) => {
     this.currentNumber = number;
   };
@@ -60,8 +70,6 @@ class GameFieldStore {
 
   removeGameFieldItem = ({ columnIndex, rowIndex }: FieldItemPosition) => {
     const newGameField = this.gameField;
-
-    // this.currentNumber = newGameField[columnIndex][rowIndex]
 
     newGameField[columnIndex][rowIndex] = null;
 

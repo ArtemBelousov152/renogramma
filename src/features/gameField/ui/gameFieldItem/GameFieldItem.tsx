@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import { FC } from 'react';
-import { Number } from 'shared/components';
+import { Number } from 'shared/components/number';
 import { useStores } from 'stores/rootStoreContext';
 
 import { GameFieldItemProps } from './gameFieldItem.types';
@@ -30,7 +30,7 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
       currentFieldHover.rowIndex === rowIndex;
 
     const isEmptyField = !currentGameFieldItem;
-
+    // TODO: вынести код из слушателей событий в отдельные функции
     return (
       <Number
         isDisabledText={isHoverField && !isStartNumber}
@@ -56,7 +56,7 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
             removeGameFieldItem({ columnIndex, rowIndex });
           }
         }}
-        onClick={(event) => {
+        onClick={() => {
           if (isStartNumber && currentGameFieldItem) {
             setCurrentNumber(
               remaningNumbers.find(

@@ -1,12 +1,11 @@
-import {
-  FinishGameDialog,
-  GameFieldItem,
-  RemaningNumbers,
-} from 'features/gameField/ui';
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { useStores } from 'stores/rootStoreContext';
 
+import { FieldActions } from '../fieldActions';
+import { FinishGameDialog } from '../finishGameDialog';
+import { GameFieldItem } from '../gameFieldItem';
+import { RemaningNumbers } from '../remaningNumbers';
 import classes from './gameField.module.scss';
 
 export const GameFieldContainer = observer(() => {
@@ -30,7 +29,6 @@ export const GameFieldContainer = observer(() => {
   }, []);
 
   if (!gameField.length) return null;
-
   return (
     <main className={classes.gameFieldContainer}>
       {/* TODO: Подумать как переделать */}
@@ -51,6 +49,7 @@ export const GameFieldContainer = observer(() => {
           </div>
         ))}
       </div>
+      <FieldActions />
       <FinishGameDialog />
       <RemaningNumbers />
     </main>
