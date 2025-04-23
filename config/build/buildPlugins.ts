@@ -8,7 +8,11 @@ export const buildPlugins = ({
   paths,
 }: BuildOptions): webpack.WebpackPluginInstance[] => {
   return [
-    new HtmlWebpackPlugin({ template: paths.html, title: 'Renogramma' }),
+    new HtmlWebpackPlugin({
+      template: paths.html,
+      title: 'Renogramma',
+      favicon: './src/shared/images/renogramma.png',
+    }),
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
