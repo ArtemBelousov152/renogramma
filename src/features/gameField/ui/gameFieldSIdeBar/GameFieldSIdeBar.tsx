@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Number } from 'shared/components/number';
 import { useStores } from 'stores/rootStoreContext';
 
+import { GameRulesModal } from '../gameRulesModal';
 import classes from './gameFieldSideBar.module.scss';
 
 export const GameFieldSIdeBar = observer(() => {
@@ -12,13 +13,16 @@ export const GameFieldSIdeBar = observer(() => {
 
   return (
     <div className={classes.container}>
-      <div>
+      <div className={classes.numberContainer}>
         <Number number={currentNumber} />
-        <span>Current</span>
+        <span>Выбранное число</span>
       </div>
-      <Button variant="contained" color="primary" onClick={resetGameField}>
-        Сбросить
-      </Button>
+      <div className={classes.buttonsContainer}>
+        <GameRulesModal />
+        <Button variant="contained" color="primary" onClick={resetGameField}>
+          Сбросить
+        </Button>
+      </div>
     </div>
   );
 });

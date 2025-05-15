@@ -5,3 +5,4 @@ export * from './gameFieldSIdeBar';
 export * from './finishGameDialog';
 export * from './configureGameField';
 export * from './fieldActions';
+export * from './gameRulesModal';
