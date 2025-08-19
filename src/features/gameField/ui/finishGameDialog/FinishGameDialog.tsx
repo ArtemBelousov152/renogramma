@@ -15,7 +15,7 @@ export interface SimpleDialogProps {
 
 export const FinishGameDialog = observer(() => {
   const {
-    gameFieldStore: { isGameFinished },
+    gameFieldStore: { isGameFinished, resetGameField },
   } = useStores();
 
   return (
@@ -23,7 +23,11 @@ export const FinishGameDialog = observer(() => {
       <DialogTitle textAlign="center">Вы выиграли!</DialogTitle>
       <List>
         <ListItem>
-          <FieldActions />
+          <FieldActions
+            editFieldCallback={() => {
+              resetGameField();
+            }}
+          />
         </ListItem>
       </List>
     </Dialog>

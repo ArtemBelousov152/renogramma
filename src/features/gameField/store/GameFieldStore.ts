@@ -51,6 +51,7 @@ class GameFieldStore {
     this.gameField = JSON.parse(JSON.stringify(this.startField));
     this.calculateRemaningNumbers();
     this.currentNumber = null;
+    this.isGameFinished = false;
   };
 
   setFieldHeight = (newHeight: number) => {

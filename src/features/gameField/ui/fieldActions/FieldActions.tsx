@@ -3,28 +3,34 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { useStores } from 'stores/rootStoreContext';
 
-export const FieldActions = observer(() => {
-  const {
-    gameFieldStore: { generateGameField },
-  } = useStores();
+import { FieldActionsProps } from './fieldActions.types';
 
-  const navigate = useNavigate();
+export const FieldActions = observer(
+  ({ editFieldCallback, generateNewGameFieldCallback }: FieldActionsProps) => {
+    const {
+      gameFieldStore: { generateGameField },
+    } = useStores();
 
-  const handleGenerateNewGameField = () => {
-    generateGameField();
-  };
+    const navigate = useNavigate();
 
-  const handleEditGameField = () => {
-    navigate('/');
-  };
-  return (
-    <Stack spacing={2} direction="row">
-      <Button onClick={handleGenerateNewGameField} variant="contained">
-        Сгенерировать поле
-      </Button>
-      <Button onClick={handleEditGameField} variant="contained">
-        Редактировать поле
-      </Button>
-    </Stack>
-  );
-});
+    const handleGenerateNewGameField = () => {
+      generateNewGameFieldCallback?.();
+      generateGameField();
+    };
+
+    const handleEditGameField = () => {
+      editFieldCallback?.();
+      navigate('/');
+    };
+    return (
+      <Stack spacing={2} direction="row">
+        <Button onClick={handleGenerateNewGameField} variant="contained">
+          Сгенерировать поле
+        </Button>
+        <Button onClick={handleEditGameField} variant="contained">
+          Редактировать поле
+        </Button>
+      </Stack>
+    );
+  }
+);
