@@ -23,7 +23,6 @@ export const GameFieldContainer = observer(() => {
       checkIsGameFinished();
     }
   }, [remaningNumbers.length]);
-
   useEffect(() => {
     generateGameField();
   }, []);

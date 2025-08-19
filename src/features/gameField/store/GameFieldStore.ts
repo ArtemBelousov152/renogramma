@@ -12,6 +12,7 @@ class GameFieldStore {
   isGameFinished: boolean = false;
   fieldWidth: number = 8;
   fieldHeight: number = 7;
+  numberChain: number[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -65,7 +66,66 @@ class GameFieldStore {
   };
 
   setCurrentFieldHover = (fieldItelPosition: null | FieldItemPosition) => {
+    this.setNumberChain(fieldItelPosition);
     this.currentFieldHover = fieldItelPosition;
+  };
+
+  setNumberChain = (fieldItemPosition: FieldItemPosition | null) => {
+    if (!fieldItemPosition) {
+      this.numberChain = [];
+      return;
+    }
+    const resultChainNumber: number[] = [];
+    const checkValudNumberOnChain = (
+      fieldItemPosition: FieldItemPosition,
+      down: boolean
+    ) => {
+      const { columnIndex, rowIndex } = fieldItemPosition;
+      const currentNumber = this.gameField[columnIndex][rowIndex];
+      if (!currentNumber) return;
+
+      if (!resultChainNumber.includes(currentNumber)) {
+        resultChainNumber.push(currentNumber);
+      }
+
+      for (let i = -1; i < 2; i++) {
+        if (columnIndex + i < 0 || columnIndex + i >= this.fieldWidth) {
+          continue;
+        }
+        for (let j = -1; j < 2; j++) {
+          if (rowIndex + j < 0 || rowIndex + j >= this.fieldHeight) {
+            continue;
+          }
+
+          const checkNumber = this.gameField[columnIndex + i][rowIndex + j];
+          if (currentNumber === checkNumber) {
+            continue;
+          }
+
+          if (
+            checkNumber &&
+            currentNumber &&
+            currentNumber - checkNumber === (down ? 1 : -1)
+          ) {
+            const numberToPush = down ? currentNumber : checkNumber;
+            if (!resultChainNumber.includes(numberToPush)) {
+              resultChainNumber.push(numberToPush);
+            }
+            checkValudNumberOnChain(
+              {
+                columnIndex: columnIndex + i,
+                rowIndex: rowIndex + j,
+              },
+              down
+            );
+          }
+        }
+      }
+    };
+    checkValudNumberOnChain(fieldItemPosition, true);
+    checkValudNumberOnChain(fieldItemPosition, false);
+
+    this.numberChain = resultChainNumber;
   };
 
   removeGameFieldItem = ({ columnIndex, rowIndex }: FieldItemPosition) => {

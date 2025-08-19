@@ -7,4 +7,5 @@ export interface NumberProps
   isDisabledText?: boolean;
   isStartNumber?: boolean;
   isEnableHover?: boolean;
+  isNumberChain?: boolean;
 }

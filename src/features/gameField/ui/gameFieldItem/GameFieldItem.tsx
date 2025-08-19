@@ -17,18 +17,17 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
         currentNumber,
         putGameFieldItem,
         remaningNumbers,
+        numberChain,
       },
     } = useStores();
 
     const isStartNumber =
       !!startField[columnIndex][rowIndex] &&
       startField[columnIndex][rowIndex] === currentGameFieldItem;
-
     const isHoverField =
       currentFieldHover !== null &&
       currentFieldHover.columnIndex === columnIndex &&
       currentFieldHover.rowIndex === rowIndex;
-
     const isEmptyField = !currentGameFieldItem;
     // TODO: вынести код из слушателей событий в отдельные функции
     return (
@@ -36,6 +35,7 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
         isDisabledText={isHoverField && !isStartNumber}
         isStartNumber={isStartNumber}
         isEnableHover={!isStartNumber}
+        isNumberChain={numberChain.includes(currentGameFieldItem ?? 0)}
         number={
           isHoverField && !isStartNumber && isEmptyField
             ? currentNumber
