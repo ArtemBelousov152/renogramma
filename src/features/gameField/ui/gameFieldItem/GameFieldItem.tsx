@@ -32,7 +32,6 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
     // TODO: вынести код из слушателей событий в отдельные функции
     return (
       <Number
-        isDisabledText={isHoverField && !isStartNumber}
         isStartNumber={isStartNumber}
         isEnableHover={!isStartNumber}
         isNumberChain={numberChain.includes(currentGameFieldItem ?? 0)}

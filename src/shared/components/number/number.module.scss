@@ -17,19 +17,15 @@
 // }
 
 [class~='hover']:hover {
-  background-color: rgb(167, 253, 167);
+  background-color: var(--secondary-color);
 }
 
 // TODO: Подумать как сделать более универсальный вариант
 .startNumbers {
-  background-color: blue;
-  color: white;
-}
-
-.disabledNumber {
-  color: gray;
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
 }
 
 .numberChain {
-  background-color: rgb(87, 183, 121);
+  background-color: var(--secondary-color);
 }

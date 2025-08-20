@@ -1,5 +1,4 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
@@ -8,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
+import { Button } from 'shared/components/button';
 
 export const GameRulesModal = () => {
   const [open, setOpen] = useState(false);
@@ -22,12 +22,7 @@ export const GameRulesModal = () => {
 
   return (
     <>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleOpen}
-        fullWidth
-      >
+      <Button onClick={handleOpen} fullWidth>
         Правила игры
       </Button>
 

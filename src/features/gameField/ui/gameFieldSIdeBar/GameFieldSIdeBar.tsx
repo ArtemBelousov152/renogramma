@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
 import { observer } from 'mobx-react-lite';
+import { Button } from 'shared/components/button';
 import { Number } from 'shared/components/number';
 import { useStores } from 'stores/rootStoreContext';
 
@@ -19,9 +19,7 @@ export const GameFieldSIdeBar = observer(() => {
       </div>
       <div className={classes.buttonsContainer}>
         <GameRulesModal />
-        <Button variant="contained" color="primary" onClick={resetGameField}>
-          Сбросить
-        </Button>
+        <Button onClick={resetGameField}>Сбросить</Button>
       </div>
     </div>
   );

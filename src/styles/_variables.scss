@@ -1,4 +1,15 @@
-:root {
-    --main-red: rgb(161, 0, 0);
-    --main-gray: rgb(177, 177, 177);
+[data-theme='dark'] {
+  --primary-color: #660bab;
+  --secondary-color: #a668d5;
+
+  --primary-text-color: white;
+  --secondary-text-color: black;
+}
+
+[data-theme='light'] {
+  --primary-color: #00c90d;
+  --secondary-color: #67e46f;
+
+  --primary-text-color: black;
+  --secondary-text-color: white;
 }

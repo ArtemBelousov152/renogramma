@@ -4,7 +4,6 @@ export interface NumberProps
     HTMLDivElement
   > {
   number: null | number;
-  isDisabledText?: boolean;
   isStartNumber?: boolean;
   isEnableHover?: boolean;
   isNumberChain?: boolean;

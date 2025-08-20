@@ -1,5 +1,6 @@
-import { Button, Slider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'shared/components/button';
+import { Slider } from 'shared/components/slider';
 import { useStores } from 'stores/rootStoreContext';
 
 import classes from './configureGameField.module.scss';
@@ -11,7 +12,12 @@ export const ConfigureGameField = () => {
   } = useStores();
 
   const handleChange = (dimensions: Dimensions) => {
-    return (_: Event, value: number) => {
+    return (_: Event, value: number | number[]) => {
+      // TODO: Подумать как убрать этот костыль и из типов убрать number[]
+      if (Array.isArray(value)) {
+        return;
+      }
+
       switch (dimensions) {
         case Dimensions.heigth:
           setFieldHeight(value);
@@ -29,7 +35,6 @@ export const ConfigureGameField = () => {
       <h2>Введите размер поля</h2>
       <h3>Ширина</h3>
       <Slider
-        aria-label="Temperature"
         defaultValue={fieldWidth}
         onChange={handleChange(Dimensions.width)}
         valueLabelDisplay="auto"
@@ -37,27 +42,21 @@ export const ConfigureGameField = () => {
         marks
         min={2}
         max={8}
-        color="warning"
       />
       <h3>Высота</h3>
       <Slider
-        aria-label="Temperature"
         defaultValue={fieldHeight}
-        // TODO: мемоизировать
         onChange={handleChange(Dimensions.heigth)}
         valueLabelDisplay="auto"
         step={1}
         marks
         min={2}
         max={8}
-        color="warning"
       />
       <Button
         onClick={() => {
           navigate('/game');
         }}
-        variant="contained"
-        color="warning"
       >
         Начать
       </Button>

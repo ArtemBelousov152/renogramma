@@ -1,6 +1,7 @@
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'shared/components/button';
 import { useStores } from 'stores/rootStoreContext';
 
 import { FieldActionsProps } from './fieldActions.types';
@@ -24,12 +25,8 @@ export const FieldActions = observer(
     };
     return (
       <Stack spacing={2} direction="row">
-        <Button onClick={handleGenerateNewGameField} variant="contained">
-          Сгенерировать поле
-        </Button>
-        <Button onClick={handleEditGameField} variant="contained">
-          Редактировать поле
-        </Button>
+        <Button onClick={handleGenerateNewGameField}>Сгенерировать поле</Button>
+        <Button onClick={handleEditGameField}>Редактировать поле</Button>
       </Stack>
     );
   }
