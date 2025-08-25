@@ -8,6 +8,7 @@
   display: grid;
   // grid-template-columns: repeat(8, auto);
   align-self: center;
+  box-shadow: var(--box-shadow);
   .column {
     display: flex;
     flex-direction: column;

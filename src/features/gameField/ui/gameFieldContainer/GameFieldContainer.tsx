@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
-import { ThemeToggle } from 'shared/components/themeToggle';
 import { useStores } from 'stores/rootStoreContext';
 
 import { FieldActions } from '../fieldActions';
@@ -49,7 +48,6 @@ export const GameFieldContainer = observer(() => {
           </div>
         ))}
       </div>
-      <ThemeToggle />
       <FieldActions />
       <FinishGameDialog />
       <RemaningNumbers />

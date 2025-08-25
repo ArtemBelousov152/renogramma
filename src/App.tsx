@@ -1,6 +1,7 @@
 import { ConfigureGameField } from 'features/gameField/ui';
 import { PlayingFieldPage } from 'pages/playingFieldPage';
 import { Route, Routes } from 'react-router-dom';
+import { Header } from 'shared/components/header';
 import { ThemeProvider } from 'shared/theme/ThemeProvider';
 import RootStore from 'stores/rootStore';
 import { RootStoreContext } from 'stores/rootStoreContext';
@@ -13,6 +14,7 @@ export const App = () => {
     <ThemeProvider>
       <RootStoreContext.Provider value={new RootStore()}>
         <div className={classNames.app}>
+          <Header />
           <Routes>
             <Route path="/game" element={<PlayingFieldPage />} />
             <Route path="/" element={<ConfigureGameField />} />

@@ -4,8 +4,10 @@ import { FC } from 'react';
 const StyledButton = styled(MuiButton)({
   backgroundColor: 'var(--primary-color)',
   color: 'var(--primary-text-color)',
+  boxShadow: 'var(--box-shadow)',
   '&:hover': {
     backgroundColor: 'var(--secondary-color)',
+    boxShadow: 'var(--box-shadow-hover)',
   },
 });
 
