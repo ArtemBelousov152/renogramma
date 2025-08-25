@@ -14,7 +14,7 @@ export const GameFieldSIdeBar = observer(() => {
   return (
     <div className={classes.container}>
       <div className={classes.numberContainer}>
-        <Number number={currentNumber} />
+        <Number number={currentNumber} style={{ borderRadius: '10px' }} />
         <span>Выбранное число</span>
       </div>
       <div className={classes.buttonsContainer}>

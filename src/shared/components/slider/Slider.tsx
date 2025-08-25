@@ -12,6 +12,10 @@ const StyledSlider = styled(MuiSlider)({
   '& .MuiSlider-rail': {
     boxShadow: 'var(--box-shadow)',
   },
+  '& .MuiSlider-mark': {
+    backgroundColor: 'var(--primary-text-color)',
+    height: '3px',
+  },
 });
 
 export const Slider: FC<SliderProps> = (props) => {

@@ -6,7 +6,7 @@ import { useStores } from 'stores/rootStoreContext';
 import { GameFieldItemProps } from './gameFieldItem.types';
 
 export const GameFieldItem: FC<GameFieldItemProps> = observer(
-  ({ columnIndex, rowIndex, currentGameFieldItem }) => {
+  ({ columnIndex, rowIndex, currentGameFieldItem, borderRadius }) => {
     const {
       gameFieldStore: {
         startField,
@@ -35,6 +35,7 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
         isStartNumber={isStartNumber}
         isEnableHover={!isStartNumber}
         isNumberChain={numberChain.includes(currentGameFieldItem ?? 0)}
+        style={{ borderRadius }}
         number={
           isHoverField && !isStartNumber && isEmptyField
             ? currentNumber

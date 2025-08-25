@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useStores } from 'stores/rootStoreContext';
 
 import { FieldActions } from '../fieldActions';
@@ -7,6 +7,7 @@ import { FinishGameDialog } from '../finishGameDialog';
 import { GameFieldItem } from '../gameFieldItem';
 import { RemaningNumbers } from '../remaningNumbers';
 import classes from './gameField.module.scss';
+import { getBorderRadiusDictionary } from './utils';
 
 export const GameFieldContainer = observer(() => {
   const {
@@ -15,6 +16,8 @@ export const GameFieldContainer = observer(() => {
       generateGameField,
       checkIsGameFinished,
       remaningNumbers,
+      fieldHeight,
+      fieldWidth,
     },
   } = useStores();
 
@@ -27,6 +30,9 @@ export const GameFieldContainer = observer(() => {
     generateGameField();
   }, []);
 
+  const borderRadiusDictionary = useMemo(() => {
+    return getBorderRadiusDictionary({ fieldHeight, fieldWidth });
+  }, [fieldHeight, fieldWidth]);
   if (!gameField.length) return null;
   return (
     <main className={classes.gameFieldContainer}>
@@ -43,6 +49,9 @@ export const GameFieldContainer = observer(() => {
                 currentGameFieldItem={currentGameFieldItem}
                 rowIndex={rowIndex}
                 key={`${columnIndex}_${rowIndex}`}
+                borderRadius={
+                  borderRadiusDictionary[`${columnIndex},${rowIndex}`]
+                }
               />
             ))}
           </div>
