@@ -52,7 +52,9 @@ export const GameFieldItem: FC<GameFieldItemProps> = observer(
           if (currentNumber) {
             setCurrentNumber(null);
           } else {
-            removeGameFieldItem({ columnIndex, rowIndex });
+            if (!isStartNumber) {
+              removeGameFieldItem({ columnIndex, rowIndex });
+            }
           }
         }}
         onClick={() => {

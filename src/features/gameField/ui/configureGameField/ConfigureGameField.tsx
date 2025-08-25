@@ -51,7 +51,7 @@ export const ConfigureGameField = () => {
         step={1}
         marks
         min={2}
-        max={8}
+        max={7}
       />
       <Button
         onClick={() => {

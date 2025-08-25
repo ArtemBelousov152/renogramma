@@ -15,8 +15,14 @@ export const RemaningNumbers = observer(() => {
     };
   };
 
+  const handleWheel: React.WheelEventHandler<HTMLDivElement> = (event) => {
+    if (event.deltaY === 0) return;
+    event.preventDefault();
+    event.currentTarget.scrollLeft += event.deltaY;
+  };
+
   return (
-    <div className={classes.remaningNumbers}>
+    <div className={classes.remaningNumbers} onWheel={handleWheel}>
       {remaningNumbers.map((number, index) => (
         <Number
           number={number}
