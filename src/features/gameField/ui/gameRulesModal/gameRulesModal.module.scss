@@ -5,9 +5,14 @@
 
 .gameRulesModalTheme {
   @include themeStyle;
+  h2,
+  h6,
+  span {
+    @include themeStyle;
+  }
 }
 
-.gameRulesModalList {
+.list {
   padding-left: 20px;
   margin-top: 5px;
   @include themeStyle;

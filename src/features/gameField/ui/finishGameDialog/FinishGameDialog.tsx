@@ -1,11 +1,10 @@
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import { observer } from 'mobx-react-lite';
 import { useStores } from 'stores/rootStoreContext';
 
 import { FieldActions } from '../fieldActions';
+import classes from './finishGameDialog.module.scss';
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -19,17 +18,11 @@ export const FinishGameDialog = observer(() => {
   } = useStores();
 
   return (
-    <Dialog style={{ padding: '20px' }} open={isGameFinished}>
-      <DialogTitle textAlign="center">Вы выиграли!</DialogTitle>
-      <List>
-        <ListItem>
-          <FieldActions
-            editFieldCallback={() => {
-              resetGameField();
-            }}
-          />
-        </ListItem>
-      </List>
+    <Dialog open={isGameFinished}>
+      <div className={classes.container}>
+        <DialogTitle textAlign="center">Вы выиграли!</DialogTitle>
+        <FieldActions editFieldCallback={resetGameField} />
+      </div>
     </Dialog>
   );
 });

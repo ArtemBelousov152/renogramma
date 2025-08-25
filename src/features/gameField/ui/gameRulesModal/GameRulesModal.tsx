@@ -40,19 +40,15 @@ export const GameRulesModal = () => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="rules-dialog-description">
-              <Typography className={classes.gameRulesModalTheme} variant="h6">
-                Цель игры
-              </Typography>
-              <span className={classes.gameRulesModalTheme}>
+              <Typography variant="h6">Цель игры</Typography>
+              <span>
                 Нужно построить цепочку из чисел от самого маленького, до самого
                 большого. При наведении на цепочку, она будет выделена.
               </span>
               <br />
               <br />
-              <Typography className={classes.gameRulesModalTheme} variant="h6">
-                Управление
-              </Typography>
-              <ul className={classes.gameRulesModalList}>
+              <Typography variant="h6">Управление</Typography>
+              <ul className={classes.list}>
                 <li>
                   <strong>Выбор числа:</strong> Левый клик по числу в списке
                   снизу — выбираем его как текущее
