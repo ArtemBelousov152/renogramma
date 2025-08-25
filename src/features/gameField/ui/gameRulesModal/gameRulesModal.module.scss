@@ -1,0 +1,14 @@
+@mixin themeStyle {
+  color: var(--primary-text-color);
+  background-color: var(--primary-color);
+}
+
+.gameRulesModalTheme {
+  @include themeStyle;
+}
+
+.gameRulesModalList {
+  padding-left: 20px;
+  margin-top: 5px;
+  @include themeStyle;
+}
